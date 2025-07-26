@@ -4,6 +4,7 @@ const BlogPost = require("../models/BlogPost");
 const createBlog = async (req, res) => {
   try {
     const blog = req.body;
+    console.log(req.body);
     const newBlog = await BlogPost.create(blog);
     res.status(200).send({ message: "Blog Post Successfully Created", data: newBlog });
   } catch (error) {
@@ -29,6 +30,22 @@ const getSingleBlog = async (req, res) => {
     if (!blog) {
       return res.status(404).send({ message: "Blog post not found" });
     }
+    res.status(200).send(blog);
+  } catch (error) {
+    res.status(500).send({ message: "Error occurred when fetching blog", error: error.message });
+  }
+};
+
+// Get single blog post by slug
+const getSingleBlogBySlug = async (req, res) => {
+  try {
+    const { slug } = req.params;
+    const blog = await BlogPost.findOne({ where: { slug } });
+
+    if (!blog) {
+      return res.status(404).send({ message: "Blog post not found" });
+    }
+
     res.status(200).send(blog);
   } catch (error) {
     res.status(500).send({ message: "Error occurred when fetching blog", error: error.message });
@@ -67,6 +84,7 @@ module.exports = {
   createBlog,
   getAllBlogs,
   getSingleBlog,
+  getSingleBlogBySlug,
   updateBlog,
   deleteBlog,
 };
