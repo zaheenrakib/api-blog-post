@@ -19,9 +19,7 @@ const app = express();
 })();
 
 app.set("trust proxy", 1);
-
 app.use(express.json({ limit: "4mb" }));
-
 app.use(cors({
   origin: "*",
   methods: ["GET", "HEAD", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
