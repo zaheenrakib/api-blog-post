@@ -43,11 +43,6 @@ app.use("/api/blog", routes.blogpost)
 app.use("/api/user" , routes.user)
 
 
-
-
-
-
-
 // Global Error Handler
 app.use((err, req, res, next) => {
   if (res.headersSent) return next(err);
