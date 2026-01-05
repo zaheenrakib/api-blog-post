@@ -21,7 +21,7 @@ const app = express();
 app.set("trust proxy", 1);
 app.use(express.json({ limit: "4mb" }));
 app.use(cors({
-  origin: "*",
+  origin: ["http://localhost:5173"],
   methods: ["GET", "HEAD", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true,
